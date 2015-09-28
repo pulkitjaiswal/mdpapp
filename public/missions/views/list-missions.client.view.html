@@ -1,0 +1,19 @@
+<!-- The list Missions view -->
+<section data-ng-controller="MissionsController" data-ng-init="find()">
+	<h1>Missions</h1>
+	<ul>
+		<!-- The list of Mission -->
+		<li data-ng-repeat="Mission in Missions">
+			<a data-ng-href="#!/Missions/{{Mission._id}}" data-ng-bind="Mission.title"></a>
+			<br>
+			<small data-ng-bind="Mission.created | date:'medium'"></small>
+			<small>/</small>
+			<small data-ng-bind="Mission.creator.fullName"></small>
+			<p data-ng-bind="Mission.content"></p>
+		</li>
+	</ul>
+	<!-- If there are no Missions in the list, suggest the user's create a new Mission -->
+	<div data-ng-hide="!Missions || Missions.length">
+		No Missions yet, why don't you <a href="/#!/Missions/create">create one</a>?
+	</div>
+</section>

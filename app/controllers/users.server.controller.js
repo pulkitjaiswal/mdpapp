@@ -49,12 +49,12 @@ exports.renderSignin = function(req, res, next) {
 	}
 };
 
-// Create a new controller method that renders the signup page
-exports.renderSignup = function(req, res, next) {
-	// If user is not connected render the signup page, otherwise redirect the user back to the main application page
+// Create a new controller method that renders the mission page
+exports.rendermission = function(req, res, next) {
+	// If user is not connected render the mission page, otherwise redirect the user back to the main application page
 	if (!req.user) {
-		// Use the 'response' object to render the signup page
-		res.render('signup', {
+		// Use the 'response' object to render the mission page
+		res.render('mission', {
 			// Set the page title variable
 			title: 'Sign-up Form',
 			// Set the flash message variable
@@ -66,7 +66,7 @@ exports.renderSignup = function(req, res, next) {
 };
 
 // Create a new controller method that creates new 'regular' users
-exports.signup = function(req, res, next) {
+exports.mission = function(req, res, next) {
 	// If user is not connected, create and login a new user, otherwise redirect the user back to the main application page
 	if (!req.user) {
 		// Create a new 'User' model instance
@@ -86,8 +86,8 @@ exports.signup = function(req, res, next) {
 				// Set the flash messages
 				req.flash('error', message);
 
-				// Redirect the user back to the signup page
-				return res.redirect('/signup');
+				// Redirect the user back to the mission page
+				return res.redirect('/mission');
 			}
 
 			// If the user was created successfully use the Passport 'login' method to login
@@ -122,9 +122,9 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 
 				// Find a unique available username
 				User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
-					// Set the available user name 
+					// Set the available user name
 					profile.username = availableUsername;
-					
+
 					// Create the user
 					user = new User(profile);
 
@@ -151,7 +151,7 @@ exports.signout = function(req, res) {
 	res.redirect('/');
 };
 
-// Create a new controller middleware that is used to authorize authenticated operations 
+// Create a new controller middleware that is used to authorize authenticated operations
 exports.requiresLogin = function(req, res, next) {
 	// If a user is not authenticated send the appropriate error message
 	if (!req.isAuthenticated()) {

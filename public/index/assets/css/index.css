@@ -1,0 +1,34 @@
+html{
+  background: url('../img/home_banner.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#jumbotronHeading{
+  font-size:70px;
+  font-family: brandon_reg;
+  color: #fff;
+  position: absolute;
+  width: 500px;
+  left: 50%;
+  margin-left: -250px;
+  z-index: 1;
+  top:50%;
+  height:400px;
+  margin-top:-200px;
+  text-align: center;
+}
+
+#loginButtons>a{
+  background-color: transparent;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  border: 2px solid #fff !important;
+  color: #fff;
+  font-size:20px;
+  padding: 10px;
+  padding-left:20px;
+  padding-right: 20px;
+}

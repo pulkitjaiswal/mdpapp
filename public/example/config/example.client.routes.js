@@ -5,11 +5,11 @@
 angular.module('example').config(['$routeProvider',
 	function($routeProvider) {
 		$routeProvider.
-		when('/', {
+		when('/example', {
 			templateUrl: 'example/views/example.client.view.html'
 		}).
 		otherwise({
-			redirectTo: '/'
+			redirectTo: '/example'
 		});
 	}
-]); 
+]);

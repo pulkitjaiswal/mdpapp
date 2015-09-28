@@ -16,7 +16,7 @@ var config = require('./config'),
 	passport = require('passport');
 
 // Define the Express configuration method
-module.exports = function() {
+module.exports = function(db) {
 	// Create a new Express application instance
 	var app = express();
 
@@ -40,12 +40,17 @@ module.exports = function() {
 	app.use(bodyParser.json());
 	app.use(methodOverride());
 
+	// Configure the MongoDB session storage
+	var mongoStore = new MongoStore({
+        db: db.connection.db
+    });
 
 	// Configure the 'session' middleware
 	app.use(session({
 		saveUninitialized: true,
 		resave: true,
 		secret: config.sessionSecret,
+		store: mongoStore
 	}));
 
 	// Set the application view engine and 'views' folder
@@ -62,13 +67,13 @@ module.exports = function() {
 	// Load the routing files
 	require('../app/routes/index.server.routes.js')(app);
 	require('../app/routes/users.server.routes.js')(app);
-	require('../app/routes/articles.server.routes.js')(app);
+	require('../app/routes/Missions.server.routes.js')(app);
 
 	// Configure static file serving
 	app.use(express.static('./public'));
 
 	// Load the Socket.io configuration
-	require('./socketio')(server, io);
+	require('./socketio')(server, io, mongoStore);
 
 	// Return the Server instance
 	return server;
